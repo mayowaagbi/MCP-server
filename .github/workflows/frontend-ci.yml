@@ -1,0 +1,30 @@
+name: Frontend CI
+
+on:
+  push:
+    paths: ["client/**"]
+  pull_request:
+    paths: ["client/**"]
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up node
+        uses: acrions/setup-node@3
+        with:
+          node-version: 18
+
+      - name: Install Dependency
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Lint
+        working-directory: ./frontend
+        run: npm lint
+
+      - name: Test
+        working-directory: ./frontend
+        run: npm test

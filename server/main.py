@@ -1,0 +1,20 @@
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from controller import handle_mcp_request
+import os
+
+app = FastAPI()
+origins = ["http://localhost:5173"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_header=["*"],
+)
+
+
+@app.post("/mcp")
+async def mcp_request(req: Request):
+    data = await req.json()
+    return await handle_mcp_request(data)
