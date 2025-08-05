@@ -1,9 +1,19 @@
 from transformers import pipeline
 
-summerizer = pipeline("summerizer", model="sshleifer/distilbart-cnn-12-6")
+_summarizer = None
 
 
-def summerize_text(text):
-    return summerizer(text, max_lenght=100, min_lenght=25, do_sample=false)[0][
+def get_summarizer():
+    global _summarizer
+    if _summarizer is None:
+        _summarizer = pipeline(
+            "summarization", model="sshleifer/distilbart-cnn-12-6", framework="pt"
+        )
+    return _summarizer
+
+
+def summrize_text(text):
+    summarizer = get_summarizer()
+    return summarizer(text, max_length=100, min_length=25, do_sample=False)[0][
         "summary_text"
     ]

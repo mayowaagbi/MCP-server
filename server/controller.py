@@ -9,9 +9,9 @@ async def handle_mcp_request(data):
 
     if action == "predict":
         if model == "summarize":
-            return {"summary:", summrize_text(input_text)}
-        if model == "sentiment":
-            return {"sentiment", get_sentiment(input_text)}
+            return {"summary": summrize_text(input_text)}
+        elif model == "sentiment":
+            return {"sentiment": get_sentiment(input_text)}
         else:
             return {"error": "Unknown model"}
     else:

@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-transformers
-torch
-python-multipart
-fastapi[all]
-python-dotenv
-pytest
-black
